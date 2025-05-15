@@ -1,0 +1,1 @@
+module.exports = { content: ['./index.html', './main.jsx', './Dashboard.jsx'], theme: { extend: {} }, plugins: [] }
