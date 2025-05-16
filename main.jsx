@@ -1,0 +1,1 @@
+import React from 'react'; import ReactDOM from 'react-dom'; ReactDOM.render(<div>Arty Portal Loaded</div>, document.getElementById('root'));
