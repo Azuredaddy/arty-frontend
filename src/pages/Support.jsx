@@ -1,0 +1,1 @@
+<div className='support'>Styled Support Page</div>
