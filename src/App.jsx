@@ -10,13 +10,20 @@ function ProtectedRoute({ children }) {
   console.log("🔐 ProtectedRoute check:", { loading, user });
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Loading session...</div>;
+    return <div className="p-8 text-center">Loading session...</div>;
   }
 
   return user ? children : <Navigate to="/login" replace />;
 }
 
+// ⛔ Wait for auth to be ready before rendering routes
 function AppRoutes() {
+  const { loading } = useAuth();
+
+  if (loading) {
+    return <div className="p-8 text-center">Loading app...</div>;
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
@@ -42,3 +49,4 @@ export default function App() {
     </AuthProvider>
   );
 }
+
