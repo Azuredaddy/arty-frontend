@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from "../firebase"; // 🔥 Required for debug panel to show currentUser
+import { auth } from "../firebase";
 
 import {
   BarChart,
@@ -80,12 +80,14 @@ const Dashboard = ({ token }) => {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold text-gray-800">Welcome back! Here’s how Arty is performing today</h1>
         <div className="flex items-center gap-3">
-          <span className={\`text-sm font-semibold \${isLive ? 'text-green-600' : 'text-red-600'}\`}>
+          <span className={`text-sm font-semibold ${isLive ? 'text-green-600' : 'text-red-600'}`}>
             {isLive ? '🟢 Live' : '🔴 Offline'}
           </span>
           <button
             onClick={() => setIsLive(!isLive)}
-            className={\`px-4 py-2 rounded-md text-white text-sm font-medium transition \${isLive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}\`}
+            className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
+              isLive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+            }`}
           >
             {isLive ? 'Stop Live' : 'Go Live'}
           </button>
@@ -99,7 +101,7 @@ const Dashboard = ({ token }) => {
             <p className="text-sm text-gray-600">Arty's Job Confidence</p>
             <span
               className="text-blue-500 cursor-help text-sm font-bold"
-              title="This bar shows how much of the workload Arty can confidently handle based on his training and your set confidence threshold. The higher the percentage, the more tasks Arty is ready to automate. By default, this threshold is set to 95%, but you can easily change it in the Admin section to suit your needs."
+              title="This bar shows how much of the workload Arty can confidently handle based on his training and your set confidence threshold."
             >
               ?
             </span>
@@ -178,12 +180,19 @@ const Dashboard = ({ token }) => {
       <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 mt-10">
         <h2 className="text-lg font-semibold mb-2">🧪 Debug Panel</h2>
         <p className="text-sm text-gray-600 mb-1">👤 Firebase User:</p>
-        <pre className="text-xs bg-white p-2 rounded overflow-x-auto">{JSON.stringify(window?.auth?.currentUser, null, 2)}</pre>
+        <pre className="text-xs bg-white p-2 rounded overflow-x-auto">
+          {JSON.stringify(auth?.currentUser, null, 2)}
+        </pre>
         <p className="text-sm text-gray-600 mt-4 mb-1">🏷️ Tenant ID (from localStorage):</p>
-        <pre className="text-xs bg-white p-2 rounded overflow-x-auto">{JSON.stringify(localStorage.getItem("tenantId"), null, 2)}</pre>
+        <pre className="text-xs bg-white p-2 rounded overflow-x-auto">
+          {JSON.stringify(localStorage.getItem("tenantId"), null, 2)}
+        </pre>
       </div>
     </main>
   );
 };
+
+export default Dashboard;
+
 
 export default Dashboard;
