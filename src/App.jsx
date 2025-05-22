@@ -7,26 +7,24 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
-  console.log("🔐 ProtectedRoute check:", { loading, user });
-
   if (loading) {
-    return <div className="p-8 text-center">Loading session...</div>;
+    return <div className="p-8 text-center">Validating session...</div>;
   }
 
   return user ? children : <Navigate to="/login" replace />;
 }
 
-// ⛔ Wait for auth to be ready before rendering routes
 function AppRoutes() {
   const { loading } = useAuth();
 
+  // 🛑 Don't even load routes until auth is ready
   if (loading) {
-    return <div className="p-8 text-center">Loading app...</div>;
+    return <div className="p-8 text-center">Loading user session...</div>;
   }
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/login" element={<Login />} />
       <Route
         path="/dashboard"
@@ -49,4 +47,5 @@ export default function App() {
     </AuthProvider>
   );
 }
+
 
