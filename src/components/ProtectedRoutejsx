@@ -4,19 +4,29 @@ import { useAuth } from "../contexts/AuthContext";
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
-  console.log("🚧 [ProtectedRoute] Check");
-  console.log("   🔄 loading:", loading);
-  console.log("   👤 user:", user);
+  console.log("🔍 ProtectedRoute MOUNTED");
+  alert("🔍 ProtectedRoute MOUNTED");
+
+  console.log("🔄 loading:", loading);
+  alert("loading: " + loading);
+
+  console.log("👤 user:", user);
+  alert("user: " + JSON.stringify(user));
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Validating session...</div>;
+    return (
+      <div className="p-8 text-center text-gray-500">
+        Validating session...
+        <pre>{JSON.stringify({ user, loading }, null, 2)}</pre>
+      </div>
+    );
   }
 
   if (!user) {
-    console.warn("⛔ No user found, redirecting to /login");
+    alert("🚫 No user — redirecting to /login");
     return <Navigate to="/login" replace />;
   }
 
-  console.log("✅ Authenticated, rendering protected content");
+  alert("✅ Authenticated — showing dashboard");
   return children;
 }
