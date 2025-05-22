@@ -1,32 +1,33 @@
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
-  console.log("🔍 ProtectedRoute MOUNTED");
-  alert("🔍 ProtectedRoute MOUNTED");
+  // ✅ Log auth state for debugging
+  useEffect(() => {
+    console.log("🔐 [ProtectedRoute] Checking auth...");
+    console.log("🕒 loading:", loading);
+    console.log("👤 user:", user);
+  }, [loading, user]);
 
-  console.log("🔄 loading:", loading);
-  alert("loading: " + loading);
-
-  console.log("👤 user:", user);
-  alert("user: " + JSON.stringify(user));
-
+  // ⏳ Wait for auth state to be initialized
   if (loading) {
     return (
       <div className="p-8 text-center text-gray-500">
         Validating session...
-        <pre>{JSON.stringify({ user, loading }, null, 2)}</pre>
       </div>
     );
   }
 
+  // ❌ Redirect if no user found
   if (!user) {
-    alert("🚫 No user — redirecting to /login");
+    console.warn("⛔ No user found, redirecting to /login");
     return <Navigate to="/login" replace />;
   }
 
-  alert("✅ Authenticated — showing dashboard");
+  // ✅ Authenticated
+  console.log("✅ Authenticated, rendering protected content");
   return children;
 }
