@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -12,7 +13,7 @@ export default function ProtectedRoute({ children }) {
   }, [loading, user]);
 
   if (loading) {
-    return <div className="p-8 text-center">Loading...</div>;
+    return <div className="p-8 text-center text-gray-500">Loading auth state...</div>;
   }
 
   if (!user) {
@@ -20,5 +21,12 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  // Debug render to prove it's working
+  console.log("✅ Authenticated, showing protected content");
+  return (
+    <div className="p-8">
+      ✅ ProtectedRoute Mounted
+      {children}
+    </div>
+  );
 }
