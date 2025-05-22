@@ -1,4 +1,6 @@
-mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from "../firebase"; // 🔥 Required for debug panel to show currentUser
+
 import {
   BarChart,
   Bar,
