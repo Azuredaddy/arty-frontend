@@ -5,14 +5,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [initialized, setInitialized] = useState(false); // 🟡
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
-      setLoading(false);
-      setInitialized(true); // ✅ auth system has booted
-    });
-    return () => unsubscribe();
-  }, []);
+  uconst [initialized, setInitialized] = useState(false);
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    setUser(user);
+    setLoading(false);
+    setInitialized(true); // ✅ signal auth is ready
+  });
+  return () => unsubscribe();
+}, []);
+
 
   return (
     <AuthContext.Provider value={{ user, loading, initialized }}>
