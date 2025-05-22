@@ -1,17 +1,17 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+// src/App.jsx
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './Layout';
-import { useAuth } from "./contexts/AuthContext";
+import { useAuth, AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from './components/ProtectedRoute';
-import AppRoutes from "./AppRoutes";
 
 function AppRoutes() {
-  const { initialized } = useAuth();
+  const { loading } = useAuth(); // updated to match context state key
 
-  if (!initialized) {
+  if (loading) {
     console.log("⏳ Waiting for Firebase auth to initialize...");
-    return <div className="p-8 text-center">🔄 Initializing authentication...</div>;
+    return <div className="p-8 text-center text-gray-500">🔄 Initializing authentication...</div>;
   }
 
   return (
@@ -35,8 +35,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </AuthProvider>
   );
 }
+
 
