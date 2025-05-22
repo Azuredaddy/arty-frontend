@@ -2,29 +2,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './Layout';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-
-function ProtectedRoute({ children }) {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return <div className="p-8 text-center">Validating session...</div>;
-  }
-
-  return user ? children : <Navigate to="/login" replace />;
-}
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute'; // ✅ External component
 
 function AppRoutes() {
-  const { loading } = useAuth();
-
-  // 🛑 Don't even load routes until auth is ready
-  if (loading) {
-    return <div className="p-8 text-center">Loading user session...</div>;
-  }
-
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route
         path="/dashboard"
@@ -46,6 +30,8 @@ export default function App() {
       <AppRoutes />
     </AuthProvider>
   );
+}
+
 }
 
 
