@@ -2,8 +2,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './Layout';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from './components/ProtectedRoute';
+import AppRoutes from "./AppRoutes";
 
 function AppRoutes() {
   const { initialized } = useAuth();
