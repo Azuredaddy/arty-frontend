@@ -80,7 +80,7 @@ const Dashboard = ({ token }) => {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold text-gray-800">Welcome back! Here’s how Arty is performing today</h1>
         <div className="flex items-center gap-3">
-          <span className={`text-sm font-semibold ${isLive ? 'text-green-600' : 'text-red-600'}`}>
+          <span className={text-sm font-semibold ${isLive ? 'text-green-600' : 'text-red-600'}}>
             {isLive ? '🟢 Live' : '🔴 Offline'}
           </span>
           <button
