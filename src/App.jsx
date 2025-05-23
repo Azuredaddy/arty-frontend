@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './Layout';
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 function AppRoutes() {
   const { loading } = useAuth(); // updated to match context state key
