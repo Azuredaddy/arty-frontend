@@ -1,35 +1,29 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Dashboard from "./pages/Dashboard";
-import Layout from "./Layout";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";  // Import AuthProvider
+import Tickets from "./pages/Tickets";
+import Admin from "./pages/Admin";
+import Training from "./pages/Training";
+import Devices from "./pages/Devices";
+import Support from "./pages/Support";
 
-function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Dashboard />
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
-  );
-}
+const App = () => {
+  const [token] = useState("dummy-token"); // simulate token
 
-export default function App() {
   return (
-    <AuthProvider> {/* Wrap with AuthProvider */}
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Dashboard token={token} />} />
+        <Route path="/tickets" element={<Tickets token={token} />} />
+        <Route path="/admin" element={<Admin token={token} />} />
+        <Route path="/training" element={<Training token={token} />} />
+        <Route path="/devices" element={<Devices token={token} />} />
+        <Route path="/support" element={<Support token={token} />} />
+      </Routes>
+    </Router>
   );
-}
+};
+
+export default App;
+
