@@ -18,15 +18,17 @@ const Dashboard = ({ token }) => {
   const [taskDistribution, setTaskDistribution] = useState([]);
   const confidenceLevel = 87;
 
+  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
   useEffect(() => {
     if (token) {
-      fetch('http://localhost:8000/api/dashboard/stats', {
+      fetch(`${apiBase}/api/dashboard/stats`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
         .then(data => setStats(data));
 
-      fetch('http://localhost:8000/api/dashboard/task-distribution', {
+      fetch(`${apiBase}/api/dashboard/task-distribution`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
