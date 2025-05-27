@@ -1,10 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App /> {/* Removed BrowserRouter */}
-  </React.StrictMode>
-);
+const App = () => <h2 className="text-lg text-green-600">Tailwind is working ✅</h2>;
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
