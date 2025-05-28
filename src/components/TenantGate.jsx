@@ -1,4 +1,3 @@
-// src/components/TenantGate.jsx
 import React, { useEffect, useState } from 'react';
 
 const TenantGate = ({ children }) => {
@@ -14,9 +13,12 @@ const TenantGate = ({ children }) => {
 
   const handleSubmit = async () => {
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const apiBase = import.meta.env.VITE_API_URL;
+      console.log("Calling API:", `${apiBase}/api/resolve-tenant?email=${encodeURIComponent(email)}`);
+      
       const res = await fetch(`${apiBase}/api/resolve-tenant?email=${encodeURIComponent(email)}`);
       if (!res.ok) throw new Error('Invalid email');
+      
       const data = await res.json();
       if (data.tenant_id) {
         setTenantId(data.tenant_id);
@@ -53,6 +55,10 @@ const TenantGate = ({ children }) => {
   }
 
   return children;
+};
+
+export default TenantGate;
+
 };
 
 export default TenantGate;
