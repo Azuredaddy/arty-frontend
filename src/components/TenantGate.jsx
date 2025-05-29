@@ -59,6 +59,3 @@ const TenantGate = ({ children }) => {
 
 export default TenantGate;
 
-};
-
-export default TenantGate;
