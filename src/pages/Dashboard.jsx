@@ -18,7 +18,7 @@ const Dashboard = ({ token }) => {
   const [taskDistribution, setTaskDistribution] = useState([]);
   const confidenceLevel = 87;
 
-  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const apiBase = import.meta.env.VITE_API_URL || 'https://arty-backend.onrender.com';
 
   useEffect(() => {
     if (token) {
