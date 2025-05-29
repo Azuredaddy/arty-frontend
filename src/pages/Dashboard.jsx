@@ -1,6 +1,6 @@
-Dimport React, { useState, useEffect } from 'react';
-iDmport {
-  DBarChart,
+import React, { useState, useEffect } from 'react';
+import {
+  BarChart,
   Bar,
   PieChart,
   Pie,
